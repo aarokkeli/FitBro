@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Diary from './screens/Diary';
+import Diet from './screens/Diet';
+import Progress from './screens/Progress';
+
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Diary') {
+            iconName = focused
+              ? 'journal'
+              : 'journal-outline';
+          } else if (route.name === 'Diet') {
+            iconName = focused ? 'fast-food' : 'fast-food-outline';
+          } else if (route.name === 'Progress') {
+            iconName = focused ? 'ios-bar-chart' : 'ios-bar-chart-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#05968f',
+        tabBarInactiveTintColor: 'gray',
+      })}>
+        <Tab.Screen name="Diary" component={Diary} options={{ headerShown: true, headerTitleAlign: 'left' }} />
+        <Tab.Screen name="Diet" component={Diet} options={{ headerShown: true, headerTitleAlign: 'left' }} />
+        <Tab.Screen name="Progress" component={Progress} options={{ headerShown: true, headerTitleAlign: 'left' }} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
