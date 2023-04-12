@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Diary from './screens/Diary';
-import Diet from './screens/Diet';
-import Progress from './screens/Progress';
+import Diary from './src/screens/Diary';
+import Diet from './src/screens/Diet';
+import Progress from './src/screens/Progress';
 
 
 const Tab = createBottomTabNavigator();
