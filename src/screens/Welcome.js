@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 
 export default function WelcomeScreen({ navigation }) {
     return (
-        <View>
+        <View style={styles.outer}>
             <Button
                 title="Log in"
                 onPress={() => navigation.navigate('Log in')}
@@ -15,3 +15,11 @@ export default function WelcomeScreen({ navigation }) {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    outer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});

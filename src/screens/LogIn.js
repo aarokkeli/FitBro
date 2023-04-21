@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -64,5 +64,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         marginBottom: 16,
+        width: '80%',
     },
 });
