@@ -7,6 +7,7 @@ import Diary from '../screens/Diary';
 import Diet from '../screens/Diet';
 import Progress from '../screens/Progress';
 import Profile from '../screens/Profile';
+import Search from '../screens/Search';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -55,6 +56,8 @@ function TabNavigator() {
             iconName = focused ? 'fast-food' : 'fast-food-outline';
           } else if (route.name === 'Progress') {
             iconName = focused ? 'ios-bar-chart' : 'ios-bar-chart-outline';
+          } else if (route.name === 'Search') {
+            iconName = focused ? 'search' : 'search-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -68,6 +71,7 @@ function TabNavigator() {
       <Tab.Screen name="Diary" component={Diary} />
       <Tab.Screen name="Diet" component={Diet} />
       <Tab.Screen name="Progress" component={Progress} />
+      <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>
   );
 }

@@ -8,7 +8,7 @@ export default function Diet() {
     return (
         <View style={styles.container}>
             <Text>
-                Diary content
+                Diet content
             </Text>
         </View>
     );
