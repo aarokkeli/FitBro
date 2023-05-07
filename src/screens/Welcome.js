@@ -1,25 +1,22 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import styles from '../config/styles';
 
 export default function WelcomeScreen({ navigation }) {
     return (
         <View style={styles.outer}>
-            <Button
-                title="Log in"
+            <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('Log in')}
-            />
-            <Button
-                title="New here? Register"
+            >
+                <Text style={styles.buttonText}>Log in</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
                 onPress={() => navigation.navigate('Sign up')}
-            />
+            >
+                <Text style={styles.buttonText}>New here? Register</Text>
+            </TouchableOpacity>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    outer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import styles from '../config/styles';
 
 export default function LogInScreen({ navigation }) {
     const [value, setValue] = useState({
@@ -36,7 +37,7 @@ export default function LogInScreen({ navigation }) {
                 autoCapitalize="none"
                 value={value.email}
                 onChangeText={(text) => setValue({ ...value, email: text })}
-                style={styles.input}
+                style={styles.input2}
             />
             <TextInput
                 placeholder="Password"
@@ -44,26 +45,14 @@ export default function LogInScreen({ navigation }) {
                 value={value.password}
                 onChangeText={(text) => setValue({ ...value, password: text })}
                 secureTextEntry={true}
-                style={styles.input}
+                style={styles.input2}
             />
-            <Button title="Log in" onPress={logIn} />
+            <TouchableOpacity style={styles.button2} onPress={logIn}>
+                <Text style={styles.buttonText}>Log in</Text>
+            </TouchableOpacity>
+            {value.error !== "" && (
+                <Text style={styles.errorText2}>{value.error}</Text>
+            )}
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    outer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 4,
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        marginBottom: 16,
-        width: '80%',
-    },
-});

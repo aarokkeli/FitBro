@@ -24,7 +24,7 @@ export default function UserStack() {
             headerRight: () => <ProfileButton />,
           }}
         />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Profile" component={Profile} options={{headerBackTitleVisible: false, headerTintColor: 'black'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,7 +38,7 @@ function ProfileButton() {
       name="person-circle-outline"
       onPress={() => navigation.navigate('Profile')}
       backgroundColor="transparent"
-      color="#05968f"
+      color="rgba(34,36,40,1)"
     />
   );
 }
@@ -47,6 +47,9 @@ function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarStyle: {
+          backgroundColor: 'rgba(34,36,40,1)',
+        },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 

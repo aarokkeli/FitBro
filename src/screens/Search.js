@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, FlatList, Image } from 'react-native';
-import { API_KEY_2 } from '@env'
+import { View, Text, TextInput, TouchableOpacity, FlatList, Image } from 'react-native';
+import { API_KEY_2, API_HOST_2 } from '@env'
+import styles from '../config/styles';
 
 export default function Search() {
     const [searchText, setSearchText] = useState('');
@@ -8,15 +9,15 @@ export default function Search() {
     const [error, setError] = useState('');
 
     const searchExercises = async () => {
-        try {
-            const options = {
-                method: 'GET',
-                headers: {
-                    'X-RapidAPI-Key': API_KEY_2,
-                    'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-                }
-            };
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': API_KEY_2,
+                'X-RapidAPI-Host': API_HOST_2
+            }
+        };
 
+        try {
             const response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${searchText}`, options)
             const data = await response.json();
             setExerciseList(data);
@@ -40,15 +41,18 @@ export default function Search() {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container3}>
+            <Text style={styles.heading}>Search exercises</Text>
             <TextInput
-                style={styles.searchInput}
+                style={styles.input}
                 autoCapitalize="none"
                 placeholder="Search exercises by bodypart"
                 value={searchText}
                 onChangeText={(text) => setSearchText(text)}
             />
-            <Button title="Search" onPress={searchExercises} />
+            <TouchableOpacity style={styles.searchButton} onPress={searchExercises}>
+                <Text style={styles.searchButtonText}>Search</Text>
+            </TouchableOpacity>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <FlatList
                 data={exerciseList}
@@ -59,56 +63,3 @@ export default function Search() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingTop: 50,
-    },
-    heading: {
-        fontSize: 13,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    searchInput: {
-        height: 40,
-        width: '80%',
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 4,
-        paddingHorizontal: 10,
-        marginBottom: 10,
-    },
-    exerciseList: {
-        width: '100%',
-        paddingHorizontal: 20,
-    },
-    exerciseItem: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 4,
-        padding: 10,
-        marginBottom: 10,
-    },
-    exerciseName: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    exerciseDescription: {
-        fontSize: 16,
-        marginBottom: 5,
-    },
-    exerciseGif: {
-        width: '100%',
-        height: 200,
-        resizeMode: 'contain',
-    },
-    errorText: {
-        color: 'red',
-        marginVertical: 10,
-    },
-});

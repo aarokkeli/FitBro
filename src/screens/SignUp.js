@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import React, { useState } from 'react';
-import { View, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import styles from '../config/styles';
 
 
 export default function SignUpScreen({ navigation }) {
@@ -24,7 +25,7 @@ export default function SignUpScreen({ navigation }) {
         try {
             await createUserWithEmailAndPassword(auth, value.email, value.password);
             navigation.navigate("Log in");
-            Alert.alert("Käyttäjän luominen onnistui!")
+            Alert.alert("User created succesfully!")
         } catch (error) {
             setValue({
                 ...value,
@@ -32,6 +33,7 @@ export default function SignUpScreen({ navigation }) {
             })
         }
     }
+
     return (
         <View style={styles.outer}>
             <TextInput
@@ -39,7 +41,7 @@ export default function SignUpScreen({ navigation }) {
                 autoCapitalize="none"
                 value={value.email}
                 onChangeText={(text) => setValue({ ...value, email: text })}
-                style={styles.input}
+                style={styles.input2}
             />
             <TextInput
                 placeholder="Password"
@@ -47,26 +49,11 @@ export default function SignUpScreen({ navigation }) {
                 secureTextEntry={true}
                 value={value.password}
                 onChangeText={(text) => setValue({ ...value, password: text })}
-                style={styles.input}
+                style={styles.input2}
             />
-            <Button title="Register" onPress={signUp} />
+            <TouchableOpacity style={styles.button} onPress={signUp}>
+                <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    outer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 4,
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        marginBottom: 16,
-        width: '80%',
-    },
-});
