@@ -8,6 +8,11 @@
 - [![Expo][Expo]][Expo-url]
 - [![Firebase][Firebase]][Firebase-url]
 
+<b>APIs</b>
+* [ExerciseDB](https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb)
+* [Nutritionix - Nutrition Database](https://rapidapi.com/msilverman/api/nutritionix-nutrition-database)
+
+
 ## Tutorial
 1. Clone the repository
   ```
